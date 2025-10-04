@@ -92,7 +92,7 @@ function App () {
       greatFortitude: false,
       lightningReflexes: false,
       ironWill: false,
-      improvedAttackBonus: 0
+      improvedAttackBonus: 5
     }
   )
   useEffect(() => {
@@ -131,21 +131,6 @@ function App () {
             {...bonusPerms}
           />
         ))}
-        <label>
-          <input
-            type='number'
-            name='improvedAttackBonus'
-            min='0'
-            max='10'
-            value={bonusPerms.improvedAttackBonus}
-            onChange={evt => {
-              setBonusPerms({
-                [evt.target.name]: evt.target.value
-              })
-            }}
-          />
-          <span>Improved Attack Bonus</span>
-        </label>
       </div>
       <Footer />
     </div>
