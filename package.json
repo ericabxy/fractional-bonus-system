@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/adventure-party-manager/",
+    "build": "vite build --base=/fractional-bonus-system/",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "standard"
