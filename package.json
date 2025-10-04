@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/adventure-party-manager/",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "standard"

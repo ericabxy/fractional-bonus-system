@@ -109,7 +109,6 @@ function App () {
       <Header>Fractional Bonus System</Header>
       <Description onChange={changeDesc} {...desc} />
       <AbilityScores dispatch={setStats} {...stats} />
-      <ExpLevel dispatch={setStats} {...stats} />
       <SavingThrows {...stats} />
       <BaseAttackBonus {...stats} />
       <h2>Fractional Bonuses</h2>
