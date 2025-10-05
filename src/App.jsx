@@ -1,13 +1,10 @@
-import { useEffect, useReducer, useState } from 'react'
+import { useEffect, useReducer } from 'react'
 import './App.css'
 
-import Header from './components/Header'
 import Description from './components/Description'
 import AbilityScores from './components/AbilityScores'
-import ExpLevel from './components/ExpLevel'
 import SavingThrows from './components/SavingThrows'
 import BaseAttackBonus from './components/BaseAttackBonus'
-import Enhancement from './components/Enhancement'
 import Feature from './components/Feature'
 import Footer from './components/Footer'
 
@@ -23,8 +20,8 @@ Formidable
 Masterful
 Capable
 Proven
-1-3: Practiced
-4-7: Competent
+1-3: Competent
+4-7: Practiced
 8-11: Accomplished
 12-15: Masterful
 16-19: Excellent
@@ -36,11 +33,10 @@ function reducer (state, action) {
     ...state,
     ...action
   }
-  throw Error('Unknown action.')
 }
 
 function App () {
-  const [ desc, setDesc ] = useReducer(
+  const [desc, setDesc] = useReducer(
     reducer, {
       experienceLevel: 1
     }
@@ -50,7 +46,7 @@ function App () {
       [evt.target.name]: evt.target.value
     })
   }
-  const [ stats, setStats ] = useReducer(
+  const [stats, setStats] = useReducer(
     reducer, {
       level: 1,
       strength: 11,
@@ -73,7 +69,7 @@ function App () {
       level: desc.experienceLevel
     })
   }, [desc])
-  const [ bonusFracs, setBonusFracs ] = useReducer(
+  const [fractional, setFractional] = useReducer(
     reducer, {
       fightersFortitude: false,
       roguesReflexes: false,
@@ -82,52 +78,55 @@ function App () {
   )
   useEffect(() => {
     setStats({
-      fighter: bonusFracs['fightersFortitude'],
-      rogue: bonusFracs['roguesReflexes'],
-      wizard: bonusFracs['wizardsWillpower']
+      fighter: fractional.fightersFortitude,
+      rogue: fractional.roguesReflexes,
+      wizard: fractional.wizardsWillpower
     })
-  }, [bonusFracs])
-  const [ bonusPerms, setBonusPerms ] = useReducer(
+  }, [fractional])
+  const [permanent, setPermanent] = useReducer(
     reducer, {
       greatFortitude: false,
       lightningReflexes: false,
       ironWill: false,
-      improvedAttackBonus: 5
+      improvedAttackBonus: 0
     }
   )
   useEffect(() => {
     setStats({
-      fortitude: bonusPerms['greatFortitude'] ? 2 : 0,
-      reflex: bonusPerms['lightningReflexes'] ? 2 : 0,
-      will: bonusPerms['ironWill'] ? 2 : 0,
-      baseAttackBonus: bonusPerms.improvedAttackBonus
+      fortitude: permanent.greatFortitude ? 2 : 0,
+      reflex: permanent.lightningReflexes ? 2 : 0,
+      will: permanent.ironWill ? 2 : 0,
+      baseAttackBonus: permanent.improvedAttackBonus
     })
-  }, [bonusPerms])
-  const [ lvl, setLvl ] = useState(1)
+  }, [permanent])
   return (
     <div>
-      <Header>Fractional Bonus System</Header>
+      <header>
+        <h1 className='App-title'>Fractional Bonus System</h1>
+      </header>
       <Description onChange={changeDesc} {...desc} />
       <AbilityScores dispatch={setStats} {...stats} />
       <SavingThrows {...stats} />
       <BaseAttackBonus {...stats} />
       <h2>Fractional Bonuses</h2>
       <div className='list'>
-        {Object.keys(bonusFracs).map((value, key) => (
+        {Object.keys(fractional).map((value, key) => (
           <Feature
+            key={key}
             name={value}
-            dispatch={setBonusFracs}
-            {...bonusFracs}
+            dispatch={setFractional}
+            {...fractional}
           />
         ))}
       </div>
       <h2>Permanent Bonuses</h2>
       <div className='list'>
-        {Object.keys(bonusPerms).map((value, key) => (
+        {Object.keys(permanent).map((value, key) => (
           <Feature
+            key={key}
             name={value}
-            dispatch={setBonusPerms}
-            {...bonusPerms}
+            dispatch={setPermanent}
+            {...permanent}
           />
         ))}
       </div>

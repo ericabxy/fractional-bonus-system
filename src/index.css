@@ -13,3 +13,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.App-title {
+  float: right;
+  margin: 0 1em;
+  max-width: 30%;
+}
