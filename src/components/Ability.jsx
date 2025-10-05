@@ -1,16 +1,18 @@
 import React from 'react'
 
 function Ability (props) {
-  const { dispatch, name } = props
-  const modifier = parseInt(props[name] / 2) - 5
+  const { dispatch, modifierName, name } = props
   const onChange = evt => {
     dispatch({
-      [name]: evt.target.value
+      [name]: evt.target.value,
+      [name + 'Modifier']: parseInt(evt.target.value / 2) - 5
     })
   }
   return (
     <div className='stat stat--ability'>
-      <label className='stat__label'>{name.slice(0, 3)}</label>
+      <label className='stat__label'>
+        {name.slice(0, 3)}
+      </label>
       <input
         className='stat__field'
         type='number'
@@ -22,7 +24,7 @@ function Ability (props) {
       <input
         className='stat__field'
         type='text'
-        value={modifier > 0 ? '+' + modifier : modifier}
+        value={props[modifierName] ? props[modifierName] : 0}
         disabled
       />
     </div>

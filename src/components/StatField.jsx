@@ -1,15 +1,28 @@
 import React from 'react'
 
 function StatField (props) {
+  const { children, name, operator, textLower, textUpper } = props
+  const numbers = (name ? name.split(' ') : []).map((statName) => (
+    props[statName] ? props[statName] : 0
+  ))
+  const result = numbers.reduce((sum, num) => sum + num, 0)
+  console.log(numbers.length > 1 && numbers, result)
   return (
-    <div className='stat'>
-      <label className='stat__label'>{props.children}</label>
-      <input
-        className='stat__field'
-        type='number'
-        value='0'
-      />
-    </div>
+    <>
+      {children}
+      {operator && <span className='stat__sign'>{operator}</span>}
+      <label>
+        {textUpper && <div className='stat__sublabel'>{textUpper}</div>}
+        <input
+          className='stat__field'
+          type='text'
+          name={name}
+          value={result}
+          disabled
+        />
+        {textLower && <div className='stat__sublabel'>{textLower}</div>}
+      </label>
+    </>
   )
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 
-import DerivedValue from './DerivedValue'
-import Label from './Label'
+import StatField from './StatField'
 
 function BaseAttackBonus (props) {
   const { baseAttackBonus, level } = props
@@ -9,11 +8,12 @@ function BaseAttackBonus (props) {
   const fractional = parseInt(level / 2)
   return (
     <div className='stat'>
-      <Label className='stat__label'>base attack bonus</Label>
-      <DerivedValue
-        className='stat__field'
-        value={fractional + bonus}
-      />
+      <StatField
+        name='baseAttackBonus baseAttack'
+        {...props}
+      >
+        <label className='stat__label'>base attack bonus</label>
+      </StatField>
     </div>
   )
 }

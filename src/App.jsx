@@ -5,8 +5,10 @@ import Description from './components/Description'
 import AbilityScores from './components/AbilityScores'
 import SavingThrows from './components/SavingThrows'
 import BaseAttackBonus from './components/BaseAttackBonus'
+import Grapple from './components/Grapple'
 import Feature from './components/Feature'
 import Footer from './components/Footer'
+import Initiative from './components/Initiative'
 
 /* Ranks
 Amateur
@@ -45,23 +47,26 @@ function App () {
     setDesc({
       [evt.target.name]: evt.target.value
     })
+    if (evt.target.name === 'experienceLevel') {
+      setStats({
+        baseAttack: parseInt(evt.target.value / 2)
+      })
+    }
+    console.log(evt.target.name, stats.baseAttack)
   }
   const [stats, setStats] = useReducer(
     reducer, {
       level: 1,
-      strength: 11,
-      dexterity: 10,
-      constitution: 11,
-      intelligence: 10,
-      wisdom: 11,
-      charisma: 10,
-      fortitude: 0,
-      reflex: 0,
-      will: 0,
-      bab: 0,
-      fighter: false,
-      rogue: false,
-      wizard: false
+      strength: 15, strengthModifier: 2,  //15
+      dexterity: 8, dexterityModifier: -1, //8
+      constitution: 13, constitutionModifier: 1,  //13
+      intelligence: 12, intelligenceModifier: 1,  //12
+      wisdom: 14, wisdomModifier: 2,  //14
+      charisma: 10, charismaModifier: 0,  //10
+      baseFortitude: 0,
+      baseReflex: 0,
+      baseWill: 0,
+      baseAttackBonus: 0
     }
   )
   useEffect(() => {
@@ -78,9 +83,15 @@ function App () {
   )
   useEffect(() => {
     setStats({
-      fighter: fractional.fightersFortitude,
-      rogue: fractional.roguesReflexes,
-      wizard: fractional.wizardsWillpower
+      baseFortitude: fractional.fightersFortitude
+        ? parseInt(stats.level / 2)
+        : parseInt(stats.level / 3),
+      baseReflex: fractional.roguesReflexes
+        ? parseInt(stats.level / 2)
+        : parseInt(stats.level / 3),
+      baseWill: fractional.wizardsWillpower
+        ? parseInt(stats.level / 2)
+        : parseInt(stats.level / 3)
     })
   }, [fractional])
   const [permanent, setPermanent] = useReducer(
@@ -93,9 +104,9 @@ function App () {
   )
   useEffect(() => {
     setStats({
-      fortitude: permanent.greatFortitude ? 2 : 0,
-      reflex: permanent.lightningReflexes ? 2 : 0,
-      will: permanent.ironWill ? 2 : 0,
+      baseFortitudeBonus: permanent.greatFortitude ? 2 : 0,
+      baseReflexBonus: permanent.lightningReflexes ? 2 : 0,
+      baseWillBonus: permanent.ironWill ? 2 : 0,
       baseAttackBonus: permanent.improvedAttackBonus
     })
   }, [permanent])
@@ -108,6 +119,8 @@ function App () {
       <AbilityScores dispatch={setStats} {...stats} />
       <SavingThrows {...stats} />
       <BaseAttackBonus {...stats} />
+      <Grapple {...stats} />
+      <Initiative {...stats} />
       <h2>Fractional Bonuses</h2>
       <div className='list'>
         {Object.keys(fractional).map((value, key) => (
