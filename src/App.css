@@ -12,12 +12,6 @@
   text-transform: uppercase;
 }
 
-.desc__number {
-  background: transparent;
-  border-style: none;
-  border-bottom: 1px solid Black;
-}
-
 .field__input {
   background: transparent;
   border-style: none;

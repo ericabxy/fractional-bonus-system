@@ -2,6 +2,34 @@ import React from 'react'
 
 import TextField from './TextField'
 
+const getRank = lv => (
+	lv < 4 ? 'Competent'
+	: lv < 8 ? 'Practiced'
+	: lv < 12 ? 'Accomplished'
+	: lv < 16 ? 'Masterful'
+	: lv < 20 ? 'Excellent'
+	: 'Legendary'
+)
+/* Ranks
+Amateur
+Skilled
+Accomplished
+Competent
+Practiced
+Magnificent
+Excellent
+Formidable
+Masterful
+Capable
+Proven
+1-3: Competent
+4-7: Practiced
+8-11: Accomplished
+12-15: Masterful
+16-19: Excellent
+20: Legendary
+*/
+
 function Description (props) {
   // Name, level, and other header info
   const [ xpLevel, setXpLevel ] = React.useState(1)
@@ -22,7 +50,7 @@ function Description (props) {
       </div>
       <div className='container'>
         <div className='container'>
-          <label className='field field--text'>
+					<label className='field field--text'>
             <input
               className='field__input'
               type='number'
@@ -33,6 +61,16 @@ function Description (props) {
               onChange={props.onChange}
             />
             <div className='field__label'>Experience Level</div>
+					</label>
+					<label className='field field--text'>
+						<input
+							className='field__input'
+							type='text'
+							name='experienceRank'
+							value={getRank(props.experienceLevel)}
+							disabled
+						/>
+            <div className='field__label'>Experience Rank</div>
           </label>
         </div>
         <div className='container'>
