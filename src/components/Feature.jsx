@@ -10,33 +10,33 @@ function Feature (props) {
   const title = name.replace(/([a-z])([A-Z])/g, '$1 $2')
   return (
     <label>
-      {
-        typeof props[name] == 'boolean' ? (
+      {typeof props[name] === 'boolean'
+        ? (
           <input
             type='checkbox'
             checked={props[name]}
             onChange={onChange}
           />
-        ) : (
+          )
+        : (
           <>
-            {[...Array(10)].map((x, i) => (
+            {[...Array(10)].map((x, elem) => (
               <input
+                key={x}
                 type='checkbox'
-                checked={i < props[name]}
+                checked={elem < props[name]}
                 onChange={evt => {
-                    if (i == props[name]) {
-                      dispatch({ [name]: parseInt(props[name]) + 1 })
-                    } else if (i == props[name] - 1) {
-                      dispatch({ [name]: parseInt(props[name]) - 1 })
-                    }
+                  if (elem === props[name]) {
+                    dispatch({ [name]: parseInt(props[name]) + 1 })
+                  } else if (elem === props[name] - 1) {
+                    dispatch({ [name]: parseInt(props[name]) - 1 })
                   }
-                }
+                }}
               />
             ))}
           </>
-        )
-      }
-      <span style={{textTransform: 'capitalize'}}>{title}</span>
+          )}
+      <span className='desc__label'>{title}</span>
     </label>
   )
 }

@@ -57,12 +57,18 @@ function App () {
   const [stats, setStats] = useReducer(
     reducer, {
       level: 1,
-      strength: 15, strengthModifier: 2,  //15
-      dexterity: 8, dexterityModifier: -1, //8
-      constitution: 13, constitutionModifier: 1,  //13
-      intelligence: 12, intelligenceModifier: 1,  //12
-      wisdom: 14, wisdomModifier: 2,  //14
-      charisma: 10, charismaModifier: 0,  //10
+      strength: 15,
+      strengthModifier: 2,
+      dexterity: 8,
+      dexterityModifier: -1,
+      constitution: 13,
+      constitutionModifier: 1,
+      intelligence: 12,
+      intelligenceModifier: 1,
+      wisdom: 14,
+      wisdomModifier: 2,
+      charisma: 10,
+      charismaModifier: 0,
       baseFortitude: 0,
       baseReflex: 0,
       baseWill: 0,
