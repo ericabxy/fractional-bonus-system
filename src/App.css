@@ -9,6 +9,17 @@
   flex-direction: column;
 }
 
+.features {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 20%;
+}
+
+.features__line {
+  display: flex;
+}
+
 .field {
 }
 

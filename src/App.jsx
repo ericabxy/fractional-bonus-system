@@ -6,29 +6,9 @@ import AbilityScores from './components/AbilityScores'
 import SavingThrows from './components/SavingThrows'
 import BaseAttackBonus from './components/BaseAttackBonus'
 import Grapple from './components/Grapple'
-import Feature from './components/Feature'
+import Features from './components/Features'
 import Footer from './components/Footer'
 import Initiative from './components/Initiative'
-
-/* Ranks
-Amateur
-Skilled
-Accomplished
-Competent
-Practiced
-Magnificent
-Excellent
-Formidable
-Masterful
-Capable
-Proven
-1-3: Competent
-4-7: Practiced
-8-11: Accomplished
-12-15: Masterful
-16-19: Excellent
-20: Legendary
-*/
 
 function reducer (state, action) {
   return {
@@ -56,7 +36,7 @@ function App () {
   }
   const [stats, setStats] = useReducer(
     reducer, {
-      level: 1,
+      level: 4,
       strength: 15,
       strengthModifier: 2,
       dexterity: 8,
@@ -127,29 +107,7 @@ function App () {
       <BaseAttackBonus {...stats} />
       <Grapple {...stats} />
       <Initiative {...stats} />
-      <h2>Fractional Bonuses</h2>
-      <div className='list'>
-        {Object.keys(fractional).map((value, key) => (
-          <Feature
-            key={key}
-            name={value}
-            dispatch={setFractional}
-            {...fractional}
-          />
-        ))}
-      </div>
-      <h2>Permanent Bonuses</h2>
-      <div className='list'>
-        {Object.keys(permanent).map((value, key) => (
-          <Feature
-            key={key}
-            name={value}
-            dispatch={setPermanent}
-            {...permanent}
-          />
-        ))}
-      </div>
-      <Footer />
+      <Features />
     </div>
   )
 }
